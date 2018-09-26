@@ -241,24 +241,26 @@ if ( ! function_exists( 'finazi_car' ) ) {
       // $title= the_title();
       if (is_home()) { ?>
         <li class="home-item"><a href=".$home.">Home</a></li>
-        <li class="home-item">Blog</li>
+        <li class="home-item-2">Blog</li>
 
         
       <?php }
       
         
         if (is_category()) {
+          
+          $cat=get_the_category();
           echo '<li class="home-item"><a href="'.$home.'">Home</a></li>';
-          echo '<li class="home-item">'.the_category().'</li>';
+          echo '<li class="home-item-2">'.$cat[0]->name.'</li>';
         }
         if (is_single()) {
           echo '<li class="home-item"><a href="'.$home.'">Home</a></li>';
-          echo '<li class="home-item">Blog</li>';?>
-          <li class="home-item" aria-current="page"><?php echo the_title() ?></li>
+          echo '<li class="home-item-2">Blog</li>';?>
+          <li class="home-item-2" aria-current="page"><?php echo the_title() ?></li>
           <?php
         }
         if (is_page()) {
-                      echo '<li class="home-item">'.the_title().'</li>';
+                      echo '<li class="home-item-2">'.the_title().'</li>';
               }
               if (is_tag()) {
                 single_tag_title();
@@ -317,6 +319,43 @@ if ( ! function_exists( 'finazi_car' ) ) {
   }
 
 
+// hien thi chuyen bai post
+
+  function post_navigation(){
+    $next= get_next_post();
+    $pre= get_previous_post();
+    ?>
+    
+    <div class="blog-related-post flw">
+      <?php if (!is_string($pre)) {?>
+        <div class="prev-post">
+          <div class="control-post-img">
+            <?php echo get_the_post_thumbnail($pre->ID); ?>
+          </div>
+          <div class="control-post-desc">
+            <h3 class="control-post-name"><a href="<?php echo $pre->guid; ?>" rel="prev"><?php echo $pre->post_title ?></a></h3>
+            <a href="<?php echo $pre->guid; ?>" class="control-post-btn">Previous</a>
+          </div>
+        </div>
+      <?php }  ?>
+      
+      <?php 
+        if (!is_string($next)) {?>
+          <div class="next-post">
+
+            <div class="control-post-img">
+              <?php echo get_the_post_thumbnail($next->ID); ?>
+            </div>
+            <div class="control-post-desc">
+              <h3 class="control-post-name"><a href="<?php echo $next->guid; ?>" rel="next"><?php echo $next->post_title ?></a></h3>
+              <a href="<?php echo $next->guid; ?>" class="control-post-btn">Next</a>
+            </div>
+          </div>
+        
+      <?php }
+         
+    echo "</div>";  
+  }
 
   /*
  * Thêm chữ Read More vào excerpt

@@ -77,10 +77,8 @@
 	    	<div class="container">
 		    	<div class="bread flw">
 		    		<h1 class="page-title"> BLOG </h1>
-		    		<div class="crumbs">
-		    			<span class="first-item"> <a href="<?php echo get_home_url(); ?>"> Home </a></span>
-		    			<span class="last-item">Blog</span>
-		    		</div>
+		  
+		    		<?php finazi_home(); ?>
 		    	</div>
 	    	</div>
 	    </div>
